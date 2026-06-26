@@ -22,14 +22,14 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 glass">
       <div className="mx-auto max-w-5xl px-4 flex h-14 items-center justify-between">
-        {/* Logo */}
+        {/* Logo — gradient on hover */}
         <Link
           href="/"
-          className="font-semibold text-foreground tracking-tight hover:text-primary transition-colors"
+          className="font-semibold tracking-tight text-foreground hover:text-primary transition-colors group"
         >
-          Emna Guizani
+          <span className="group-hover:gradient-text transition-all">Emna Guizani</span>
         </Link>
 
         {/* Desktop nav */}
@@ -71,7 +71,7 @@ export function Header() {
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur px-4 py-4 flex flex-col gap-1">
+        <div className="md:hidden border-t border-white/10 glass px-4 py-4 flex flex-col gap-1">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
