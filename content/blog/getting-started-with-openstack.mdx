@@ -1,0 +1,75 @@
+---
+title: "Getting Started with OpenStack: Deploying Your First Private Cloud"
+date: "2025-11-15"
+description: "A practical walkthrough of standing up a private cloud with OpenStack — covering Keystone, Neutron, Glance, and Nova from scratch."
+tags: ["OpenStack", "Cloud", "DevOps", "Infrastructure"]
+---
+
+# Getting Started with OpenStack
+
+OpenStack is the leading open-source platform for building private and hybrid clouds. In this post I'll walk through the experience of deploying the core services for the first time — the things I wish I'd known before diving in.
+
+## Why OpenStack?
+
+When you need a private cloud without the licensing costs of VMware or the vendor lock-in of a public provider, OpenStack is the answer. It gives you:
+
+- **Full control** over compute, networking, and storage
+- A well-documented, modular architecture
+- An active community and production-proven stability
+
+## Core Services You Need to Know
+
+OpenStack is assembled from loosely coupled services. For a minimal production-ready deployment, you need:
+
+| Service | Purpose |
+|---|---|
+| Keystone | Identity and authentication |
+| Glance | Image registry |
+| Nova | Compute (VM lifecycle) |
+| Neutron | Networking |
+| Placement | Resource tracking for scheduler |
+| Horizon | Web dashboard |
+| Cinder | Block storage |
+
+## Setting Up Keystone
+
+Keystone is the first service you deploy — everything else relies on it for authentication tokens.
+
+```bash
+# Install and configure Keystone
+apt install keystone python3-openstackclient
+```
+
+Configure `/etc/keystone/keystone.conf` to point at your database and then bootstrap:
+
+```bash
+keystone-manage db_sync
+keystone-manage bootstrap \
+  --bootstrap-password ADMIN_PASS \
+  --bootstrap-admin-url http://controller:5000/v3/ \
+  --bootstrap-internal-url http://controller:5000/v3/ \
+  --bootstrap-public-url http://controller:5000/v3/ \
+  --bootstrap-region-id RegionOne
+```
+
+## Networking with Neutron
+
+Neutron is the most complex service to configure, but it's what gives you the full software-defined networking experience — VLANs, floating IPs, security groups, and routers.
+
+The key configuration choice is the ML2 plugin and mechanism driver. For most bare-metal deployments, `openvswitch` is the right pick.
+
+## Lessons Learned
+
+1. **Start with DevStack for learning** — it automates everything so you can explore the APIs without fighting config files.
+2. **Use Ansible for real deployments** — configuring 10+ services by hand is error-prone. Structured Ansible roles make it repeatable and auditable.
+3. **Monitor from day one** — integrate Prometheus + Grafana before you need them; debugging a down cluster without metrics is painful.
+
+## What's Next
+
+In future posts I'll cover:
+
+- Automating cluster deployment with Ansible roles
+- Integrating Kubernetes on top of OpenStack VMs
+- Setting up Prometheus and Grafana for observability
+
+Stay tuned!
