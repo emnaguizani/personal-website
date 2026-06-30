@@ -11,10 +11,10 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 const categoryColors: Record<string, { bg: string; text: string }> = {
-  "Cloud & DevOps": { bg: "bg-indigo-500/10", text: "text-indigo-500 dark:text-indigo-400" },
-  "Programming":    { bg: "bg-cyan-500/10",   text: "text-cyan-600 dark:text-cyan-400" },
-  "Languages":      { bg: "bg-violet-500/10", text: "text-violet-600 dark:text-violet-400" },
-  "Soft Skills":    { bg: "bg-teal-500/10",   text: "text-teal-600 dark:text-teal-400" },
+  "Cloud & DevOps": { bg: "bg-violet-500/10",  text: "text-violet-600 dark:text-violet-300" },
+  "Programming":    { bg: "bg-fuchsia-500/10", text: "text-fuchsia-600 dark:text-fuchsia-300" },
+  "Languages":      { bg: "bg-purple-500/10",  text: "text-purple-600 dark:text-purple-300" },
+  "Soft Skills":    { bg: "bg-pink-500/10",    text: "text-pink-600 dark:text-pink-300" },
 };
 
 export function Skills() {

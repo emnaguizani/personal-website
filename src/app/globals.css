@@ -3,69 +3,69 @@
 /* Use .dark class for dark mode (set by next-themes on <html>) */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ─── Aurora Design Tokens ───────────────────────────────────── */
+/* ─── Velvet Lavender Design Tokens ─────────────────────────── */
 @layer base {
   :root {
-    /* Light mode — clean slate with indigo accent */
-    --background: 220 33% 98%;
-    --foreground: 224 71% 8%;
+    /* Light mode — soft lavender with rose gold accents */
+    --background: 280 38% 97%;
+    --foreground: 268 52% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 224 71% 8%;
+    --card: 280 30% 99%;
+    --card-foreground: 268 52% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 8%;
+    --popover: 280 30% 99%;
+    --popover-foreground: 268 52% 12%;
 
-    --primary: 238 84% 58%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 262 60% 52%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14% 93%;
-    --secondary-foreground: 224 71% 8%;
+    --secondary: 280 22% 92%;
+    --secondary-foreground: 268 52% 12%;
 
-    --muted: 220 14% 93%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 280 22% 92%;
+    --muted-foreground: 268 18% 44%;
 
-    --accent: 238 84% 58%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 8 52% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 88%;
-    --input: 220 13% 88%;
-    --ring: 238 84% 58%;
+    --border: 280 18% 87%;
+    --input: 280 18% 87%;
+    --ring: 262 60% 52%;
     --radius: 0.625rem;
   }
 
   .dark {
-    /* Dark mode — deep navy aurora */
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
+    /* Dark mode — deep midnight purple, velvet lavender */
+    --background: 268 42% 5%;
+    --foreground: 260 38% 94%;
 
-    --card: 224 71% 6%;
-    --card-foreground: 213 31% 91%;
+    --card: 268 36% 8%;
+    --card-foreground: 260 38% 94%;
 
-    --popover: 224 71% 6%;
-    --popover-foreground: 213 31% 91%;
+    --popover: 268 36% 8%;
+    --popover-foreground: 260 38% 94%;
 
-    --primary: 238 76% 68%;
-    --primary-foreground: 224 71% 4%;
+    --primary: 262 68% 74%;
+    --primary-foreground: 268 42% 5%;
 
-    --secondary: 223 47% 11%;
-    --secondary-foreground: 213 31% 91%;
+    --secondary: 268 28% 14%;
+    --secondary-foreground: 260 38% 94%;
 
-    --muted: 223 47% 11%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 268 26% 13%;
+    --muted-foreground: 262 18% 58%;
 
-    --accent: 238 76% 68%;
-    --accent-foreground: 224 71% 4%;
+    --accent: 8 58% 72%;
+    --accent-foreground: 268 42% 5%;
 
     --destructive: 0 62% 50%;
-    --destructive-foreground: 213 31% 91%;
+    --destructive-foreground: 260 38% 94%;
 
-    --border: 223 47% 14%;
-    --input: 223 47% 14%;
-    --ring: 238 76% 68%;
+    --border: 268 24% 17%;
+    --input: 268 24% 17%;
+    --ring: 262 68% 74%;
   }
 }
 
@@ -103,63 +103,80 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
+    font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
     -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display, Georgia, serif);
   }
 }
 
 /* ─── Glassmorphism utilities ────────────────────────────────── */
 @layer utilities {
   .glass {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.55);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.32);
   }
 
   .dark .glass {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(176, 148, 242, 0.05);
+    border: 1px solid rgba(176, 148, 242, 0.12);
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.68);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.38);
     transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   }
 
   .dark .glass-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(176, 148, 242, 0.05);
+    border: 1px solid rgba(176, 148, 242, 0.09);
+  }
+
+  /* More opaque variant for modals so text stays readable */
+  .glass-modal {
+    background: rgba(250, 247, 255, 0.94);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+  }
+
+  .dark .glass-modal {
+    background: rgba(14, 10, 26, 0.92);
+    border: 1px solid rgba(176, 148, 242, 0.14);
   }
 
   .glass-card:hover {
-    border-color: rgba(99, 102, 241, 0.4);
-    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.15),
-                0 8px 32px rgba(99, 102, 241, 0.08),
-                0 2px 8px rgba(0, 0, 0, 0.08);
+    border-color: rgba(160, 120, 220, 0.42);
+    box-shadow: 0 0 0 1px rgba(160, 120, 220, 0.16),
+                0 8px 32px rgba(160, 120, 220, 0.10),
+                0 2px 8px rgba(0, 0, 0, 0.06);
     transform: translateY(-2px);
   }
 
   .dark .glass-card:hover {
-    border-color: rgba(129, 140, 248, 0.5);
-    box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.2),
-                0 0 24px rgba(99, 102, 241, 0.12),
-                0 8px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(176, 148, 242, 0.48);
+    box-shadow: 0 0 0 1px rgba(176, 148, 242, 0.20),
+                0 0 28px rgba(140, 100, 220, 0.14),
+                0 8px 40px rgba(0, 0, 0, 0.45);
   }
 
-  /* Gradient text */
+  /* Gradient text — lavender → rose pink → rose gold */
   .gradient-text {
-    background: linear-gradient(135deg, #818cf8 0%, #22d3ee 50%, #2dd4bf 100%);
+    background: linear-gradient(135deg, #C4AAFC 0%, #E890C0 48%, #F0A880 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .dark .gradient-text {
-    background: linear-gradient(135deg, #818cf8 0%, #22d3ee 50%, #2dd4bf 100%);
+    background: linear-gradient(135deg, #C4AAFC 0%, #E890C0 48%, #F0A880 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -175,7 +192,7 @@
     position: absolute;
     inset: -1px;
     border-radius: inherit;
-    background: linear-gradient(135deg, #818cf8, #22d3ee, #2dd4bf);
+    background: linear-gradient(135deg, #C4AAFC, #E890C0, #F0A880);
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: -1;
@@ -211,28 +228,28 @@
 }
 
 .blob-1 {
-  width: 480px; height: 480px;
-  background: radial-gradient(circle, rgba(99,102,241,0.45) 0%, transparent 70%);
-  top: -120px; left: -80px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(120, 72, 200, 0.50) 0%, transparent 70%);
+  top: -130px; left: -90px;
   animation: blobFloat1 9s ease-in-out infinite;
 }
 .blob-2 {
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(6,182,212,0.35) 0%, transparent 70%);
-  top: 60px; right: -60px;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(220, 140, 120, 0.38) 0%, transparent 70%);
+  top: 50px; right: -70px;
   animation: blobFloat2 11s ease-in-out infinite;
   animation-delay: -4s;
 }
 .blob-3 {
-  width: 360px; height: 360px;
-  background: radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%);
-  bottom: -60px; left: 35%;
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(176, 130, 248, 0.36) 0%, transparent 70%);
+  bottom: -70px; left: 35%;
   animation: blobFloat3 13s ease-in-out infinite;
   animation-delay: -7s;
 }
 .blob-4 {
-  width: 280px; height: 280px;
-  background: radial-gradient(circle, rgba(20,184,166,0.25) 0%, transparent 70%);
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(210, 90, 160, 0.30) 0%, transparent 70%);
   top: 40%; right: 20%;
   animation: blobFloat1 10s ease-in-out infinite;
   animation-delay: -2s;
