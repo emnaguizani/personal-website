@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { z } from "zod";
 
-// TODO: Add your Resend API key to .env.local as RESEND_API_KEY=re_xxxxxx
-// Sign up at https://resend.com — free tier supports 100 emails/day.
+// Setup: add GMAIL_USER and GMAIL_APP_PASSWORD to .env.local
+// (create an app password at https://myaccount.google.com/apppasswords —
+// requires 2-Step Verification enabled on the Google account).
 
 const schema = z.object({
   name: z.string().min(2),
@@ -12,15 +13,14 @@ const schema = z.object({
 });
 
 export async function POST(req: Request) {
-  // Lazy-initialize so the build doesn't fail without an API key
-  if (!process.env.RESEND_API_KEY) {
-    console.error("RESEND_API_KEY is not set.");
+  // Lazy-initialize so the build doesn't fail without credentials
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    console.error("GMAIL_USER or GMAIL_APP_PASSWORD is not set.");
     return NextResponse.json(
       { error: "Email service is not configured. Please try contacting me directly." },
       { status: 503 }
     );
   }
-  const resend = new Resend(process.env.RESEND_API_KEY);
 
   let body: unknown;
   try {
@@ -39,24 +39,30 @@ export async function POST(req: Request) {
 
   const { name, email, message } = parsed.data;
 
-  // TODO: Replace "delivered@resend.dev" with a verified sender domain once
-  //       you've added your domain in the Resend dashboard.
-  const { error } = await resend.emails.send({
-    from: "Portfolio Contact <delivered@resend.dev>",
-    to: ["guizani.emna14@gmail.com"],
-    replyTo: email,
-    subject: `Portfolio contact from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-    html: `
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-      <hr />
-      <p>${message.replace(/\n/g, "<br>")}</p>
-    `,
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
   });
 
-  if (error) {
-    console.error("Resend error:", error);
+  try {
+    await transporter.sendMail({
+      from: `Portfolio Contact <${process.env.GMAIL_USER}>`,
+      to: process.env.GMAIL_USER,
+      replyTo: email,
+      subject: `Portfolio contact from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+      html: `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+        <hr />
+        <p>${message.replace(/\n/g, "<br>")}</p>
+      `,
+    });
+  } catch (error) {
+    console.error("Nodemailer error:", error);
     return NextResponse.json(
       { error: "Failed to send email. Please try again later." },
       { status: 500 }
