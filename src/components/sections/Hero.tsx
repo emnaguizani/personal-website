@@ -76,7 +76,7 @@ export function Hero() {
         {/* CTAs */}
         <motion.div
           {...item(0.6)}
-          className="mt-10 flex flex-wrap justify-center gap-3"
+          className="mt-10 flex flex-wrap justify-center items-center gap-4"
         >
           <Button asChild size="lg" className="gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-shadow">
             <Link href="/#projects">

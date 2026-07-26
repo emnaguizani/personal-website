@@ -9,7 +9,9 @@ import { Badge } from "@/components/ui/badge";
 
 interface Props {
   project: ProjectWithMedia;
+  allProjects: ProjectWithMedia[];
   onClose: () => void;
+  onNavigate: (project: ProjectWithMedia) => void;
 }
 
 const gradients: Record<string, string> = {
@@ -19,7 +21,10 @@ const gradients: Record<string, string> = {
   "food-delivery-app":"from-rose-900 via-pink-700 to-amber-600",
 };
 
-export function ProjectModal({ project, onClose }: Props) {
+export function ProjectModal({ project, allProjects, onClose, onNavigate }: Props) {
+  const currentIdx = allProjects.findIndex((p) => p.id === project.id);
+  const prevProject = currentIdx > 0 ? allProjects[currentIdx - 1] : null;
+  const nextProject = currentIdx < allProjects.length - 1 ? allProjects[currentIdx + 1] : null;
   const images =
     project.galleryImages.length > 0
       ? project.galleryImages
@@ -258,6 +263,39 @@ export function ProjectModal({ project, onClose }: Props) {
               >
                 Live Demo →
               </a>
+            )}
+          </div>
+        )}
+
+        {/* Project navigation */}
+        {(prevProject || nextProject) && (
+          <div className="flex items-center justify-between pt-3 border-t border-border/50">
+            {prevProject ? (
+              <button
+                type="button"
+                onClick={() => onNavigate(prevProject)}
+                className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors group"
+              >
+                <ChevronLeft className="h-3.5 w-3.5 group-hover:-translate-x-0.5 transition-transform" />
+                <span>
+                  <span className="block text-[10px] uppercase tracking-widest mb-0.5 opacity-60">Previous</span>
+                  {prevProject.title}
+                </span>
+              </button>
+            ) : <span />}
+
+            {nextProject && (
+              <button
+                type="button"
+                onClick={() => onNavigate(nextProject)}
+                className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors group text-right ml-auto"
+              >
+                <span>
+                  <span className="block text-[10px] uppercase tracking-widest mb-0.5 opacity-60">Next</span>
+                  {nextProject.title}
+                </span>
+                <ChevronRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </button>
             )}
           </div>
         )}

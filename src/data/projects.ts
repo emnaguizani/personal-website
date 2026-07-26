@@ -93,12 +93,21 @@ export const projects: Project[] = [
     title: "Food Delivery App",
     dateRange: "Nov – Dec 2024",
     description:
-      "Food delivery app letting users order food for delivery, built with low-code development techniques using FlutterFlow.",
-    highlights: [
-      "End-to-end food ordering and delivery flow",
-      "Built with low-code techniques for rapid development",
+      "Mobile food delivery app letting users browse restaurants, order food, and track delivery in real time, built with low-code development techniques using FlutterFlow.",
+    whatIDid: `Designed and built a mobile food delivery app end to end using FlutterFlow, a low-code platform for building native Flutter apps visually. The goal was to explore how far low-code tooling could go in delivering a production-quality mobile experience without hand-writing every widget.\n\nThe app covers the full ordering journey: browsing restaurants and menus, adding items to a cart, applying order customizations, checking out, and tracking delivery status in real time. I modeled the data layer with Firebase (Firestore for restaurants, menus, and orders; Firebase Auth for user accounts) and wired it to FlutterFlow's visual logic builder to handle cart state, order totals, and status updates.\n\nOn the UI side, I built a responsive, mobile-first interface with custom widgets for restaurant cards, menu item detail sheets, and an order-tracking screen, paying close attention to spacing, hierarchy, and interaction feedback so the low-code build didn't feel like one. I also set up conditional navigation and state-based UI (empty cart, loading, order-confirmed states) to keep the experience polished across edge cases.`,
+    whatILearned: [
+      "Rapidly prototyping and shipping a full mobile app with low-code tooling in FlutterFlow",
+      "Modeling a real-time data layer with Firebase Firestore and Firebase Auth",
+      "Structuring app state (cart, checkout, order status) using FlutterFlow's visual logic builder",
+      "Designing a polished, mobile-first UI/UX within the constraints of a low-code platform",
+      "Handling conditional UI and edge-case states (empty cart, loading, order confirmation) for a smooth user flow",
     ],
-    techStack: ["FlutterFlow"],
+    highlights: [
+      "End-to-end food ordering and delivery flow with real-time order tracking",
+      "Firebase-backed data layer for restaurants, menus, and orders",
+      "Built with low-code techniques in FlutterFlow for rapid, native-quality development",
+    ],
+    techStack: ["FlutterFlow", "Flutter", "Firebase"],
     featured: false,
   },
 ];

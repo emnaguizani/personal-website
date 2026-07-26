@@ -30,28 +30,31 @@ const variantClasses: Record<Variant, string> = {
 };
 
 const sizeClasses: Record<Size, string> = {
-  default: "h-9 px-4 py-2",
-  sm: "h-8 rounded-md px-3 text-xs",
-  lg: "h-10 rounded-md px-8",
-  icon: "h-9 w-9",
+  default: "h-9 px-4 py-2 text-sm",
+  sm:      "h-8 rounded-md px-3 text-xs",
+  lg:      "h-12 rounded-lg px-8 text-base",
+  icon:    "h-9 w-9",
 };
 
+const baseClasses =
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50";
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    { className, variant = "default", size = "default", asChild: _asChild, ...props },
-    ref
-  ) => {
+  ({ className, variant = "default", size = "default", asChild, children, ...props }, ref) => {
+    const cls = cn(baseClasses, variantClasses[variant], sizeClasses[size], className);
+
+    // When asChild is true, merge button classes onto the single child element
+    if (asChild && React.isValidElement(children)) {
+      const child = children as React.ReactElement<{ className?: string }>;
+      return React.cloneElement(child, {
+        className: cn(cls, child.props.className),
+      });
+    }
+
     return (
-      <button
-        className={cn(
-          "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
-          variantClasses[variant],
-          sizeClasses[size],
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
+      <button className={cls} ref={ref} {...props}>
+        {children}
+      </button>
     );
   }
 );

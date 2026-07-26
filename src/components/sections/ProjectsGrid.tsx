@@ -131,7 +131,9 @@ export function ProjectsGrid({ projects }: { projects: ProjectWithMedia[] }) {
               <ProjectModal
                 key={selected.id}
                 project={selected}
+                allProjects={projects}
                 onClose={() => setSelected(null)}
+                onNavigate={setSelected}
               />
             </AnimatePresence>
           </motion.div>
