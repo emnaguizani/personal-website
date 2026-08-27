@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Download, Mail } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ParticleCanvas } from "@/components/ParticleCanvas";
 import { motion } from "framer-motion";
@@ -82,11 +82,6 @@ export function Hero() {
             <Link href="/#projects">
               View Projects <ArrowRight className="h-4 w-4" />
             </Link>
-          </Button>
-          <Button asChild variant="outline" size="lg" className="gap-2 glass border-white/20 hover:border-primary/40">
-            <a href="/resume.pdf" download>
-              <Download className="h-4 w-4" /> Download Resume
-            </a>
           </Button>
           <Button asChild variant="ghost" size="lg" className="gap-2 hover:bg-white/10">
             <Link href="/contact">

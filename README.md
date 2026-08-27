@@ -50,8 +50,6 @@ src/
     └── utils.ts            # cn() helper
 content/
 └── blog/                   # ← Drop .mdx files here to publish posts
-public/
-└── resume.pdf              # ← Replace with your actual resume
 ```
 
 ---
@@ -97,11 +95,6 @@ Your markdown content here…
 ```
 
 The file name becomes the URL slug: `/blog/my-post-slug`.
-
-### Resume
-
-Replace `public/resume.pdf` with your actual resume PDF.
-The "Download Resume" button on the hero section links to `/resume.pdf`.
 
 ---
 
